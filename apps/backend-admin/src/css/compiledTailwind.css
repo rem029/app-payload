@@ -1,0 +1,83 @@
+.m-0 {
+  margin: 0px
+}
+
+.m-8 {
+  margin: 2rem
+}
+
+.flex {
+  display: flex
+}
+
+.contents {
+  display: contents
+}
+
+.hidden {
+  display: none
+}
+
+.min-w-24 {
+  min-width: 6rem
+}
+
+.max-w-md {
+  max-width: 28rem
+}
+
+.grow {
+  flex-grow: 1
+}
+
+.flex-row {
+  flex-direction: row
+}
+
+.flex-col {
+  flex-direction: column
+}
+
+.justify-between {
+  justify-content: space-between
+}
+
+.gap-2 {
+  gap: 0.5rem
+}
+
+.gap-4 {
+  gap: 1rem
+}
+
+.p-0 {
+  padding: 0px
+}
+
+.p-1 {
+  padding: 0.25rem
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.italic {
+  font-style: italic
+}
+
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity))
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity))
+}

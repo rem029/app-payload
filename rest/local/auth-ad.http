@@ -1,0 +1,20 @@
+@urlBase = http://localhost:3004
+@urLogin = {{urlBase}}/auth-ad
+
+### METHOD 1 ADD \ LDAPJS
+POST {{urLogin}}/ldapjs
+Content-Type: application/json
+
+{
+  "username": "do.mfa.1",
+  "password": "#~$.2o25!!"
+}
+
+### METHOD 2 LOGIN \ AD2
+POST {{urLogin}}/activedirector2
+Content-Type: application/json
+
+{
+  "username": "do.mfa.1",
+  "password": "#~$.2o25!!"
+}

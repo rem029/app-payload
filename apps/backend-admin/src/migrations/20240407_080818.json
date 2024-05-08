@@ -1,0 +1,3133 @@
+{
+  "id": "6af2b96d-9b8e-49fd-95d1-310b854054e1",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "employee_questions_item": {
+      "name": "employee_questions_item",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "enum_employee_questions_item_type",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language": {
+          "name": "language",
+          "type": "enum_employee_questions_item_language",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subtitle": {
+          "name": "subtitle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_questions_item_order_idx": {
+          "name": "employee_questions_item_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "employee_questions_item_parent_id_idx": {
+          "name": "employee_questions_item_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_questions_item__parent_id_employee_questions_id_fk": {
+          "name": "employee_questions_item__parent_id_employee_questions_id_fk",
+          "tableFrom": "employee_questions_item",
+          "tableTo": "employee_questions",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_questions": {
+      "name": "employee_questions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "default_title": {
+          "name": "default_title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "default_subtitle": {
+          "name": "default_subtitle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "employee_questions_created_at_idx": {
+          "name": "employee_questions_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_questions_rels": {
+      "name": "employee_questions_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "department_id": {
+          "name": "department_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_questions_rels_order_idx": {
+          "name": "employee_questions_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "employee_questions_rels_parent_idx": {
+          "name": "employee_questions_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "employee_questions_rels_path_idx": {
+          "name": "employee_questions_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_questions_rels_parent_id_employee_questions_id_fk": {
+          "name": "employee_questions_rels_parent_id_employee_questions_id_fk",
+          "tableFrom": "employee_questions_rels",
+          "tableTo": "employee_questions",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "employee_questions_rels_department_id_department_id_fk": {
+          "name": "employee_questions_rels_department_id_department_id_fk",
+          "tableFrom": "employee_questions_rels",
+          "tableTo": "department",
+          "columnsFrom": [
+            "department_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_questions_email_status": {
+      "name": "employee_questions_email_status",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "anonymous_id": {
+          "name": "anonymous_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "employee_questions_email_status_anonymous_id_idx": {
+          "name": "employee_questions_email_status_anonymous_id_idx",
+          "columns": [
+            "anonymous_id"
+          ],
+          "isUnique": true
+        },
+        "employee_questions_email_status_email_idx": {
+          "name": "employee_questions_email_status_email_idx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        },
+        "employee_questions_email_status_created_at_idx": {
+          "name": "employee_questions_email_status_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_responses_questions": {
+      "name": "employee_responses_questions",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "response": {
+          "name": "response",
+          "type": "enum_employee_responses_questions_response",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "employee_responses_questions_order_idx": {
+          "name": "employee_responses_questions_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "employee_responses_questions_parent_id_idx": {
+          "name": "employee_responses_questions_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_responses_questions__parent_id_employee_responses_id_fk": {
+          "name": "employee_responses_questions__parent_id_employee_responses_id_fk",
+          "tableFrom": "employee_responses_questions",
+          "tableTo": "employee_responses",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_responses": {
+      "name": "employee_responses",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "anonymous_id": {
+          "name": "anonymous_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "department": {
+          "name": "department",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "department_sub": {
+          "name": "department_sub",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employee_comments": {
+          "name": "employee_comments",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "employee_responses_anonymous_id_idx": {
+          "name": "employee_responses_anonymous_id_idx",
+          "columns": [
+            "anonymous_id"
+          ],
+          "isUnique": true
+        },
+        "employee_responses_created_at_idx": {
+          "name": "employee_responses_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_responses_rels": {
+      "name": "employee_responses_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "employee_questions_id": {
+          "name": "employee_questions_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_responses_rels_order_idx": {
+          "name": "employee_responses_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "employee_responses_rels_parent_idx": {
+          "name": "employee_responses_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "employee_responses_rels_path_idx": {
+          "name": "employee_responses_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_responses_rels_parent_id_employee_responses_id_fk": {
+          "name": "employee_responses_rels_parent_id_employee_responses_id_fk",
+          "tableFrom": "employee_responses_rels",
+          "tableTo": "employee_responses",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "employee_responses_rels_employee_questions_id_employee_questions_id_fk": {
+          "name": "employee_responses_rels_employee_questions_id_employee_questions_id_fk",
+          "tableFrom": "employee_responses_rels",
+          "tableTo": "employee_questions",
+          "columnsFrom": [
+            "employee_questions_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "survey_customer_feedbacks": {
+      "name": "survey_customer_feedbacks",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "visit_date": {
+          "name": "visit_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "receipt_id": {
+          "name": "receipt_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "visited_restaurant": {
+          "name": "visited_restaurant",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meal_period": {
+          "name": "meal_period",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "visit_frequency": {
+          "name": "visit_frequency",
+          "type": "enum_survey_customer_feedbacks_visit_frequency",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating_greeting": {
+          "name": "rating_greeting",
+          "type": "enum_survey_customer_feedbacks_rating_greeting",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating_service": {
+          "name": "rating_service",
+          "type": "enum_survey_customer_feedbacks_rating_service",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating_beverage": {
+          "name": "rating_beverage",
+          "type": "enum_survey_customer_feedbacks_rating_beverage",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating_food": {
+          "name": "rating_food",
+          "type": "enum_survey_customer_feedbacks_rating_food",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating_value_for_money": {
+          "name": "rating_value_for_money",
+          "type": "enum_survey_customer_feedbacks_rating_value_for_money",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating_cleanliness": {
+          "name": "rating_cleanliness",
+          "type": "enum_survey_customer_feedbacks_rating_cleanliness",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discovery_method": {
+          "name": "discovery_method",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "will_visit_again": {
+          "name": "will_visit_again",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "manager_visit": {
+          "name": "manager_visit",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "favorite_restaurant": {
+          "name": "favorite_restaurant",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "additional_comments": {
+          "name": "additional_comments",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telephone_number": {
+          "name": "telephone_number",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_date": {
+          "name": "birth_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_address": {
+          "name": "email_address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "marketing_consent": {
+          "name": "marketing_consent",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discovery_text": {
+          "name": "discovery_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "survey_customer_feedbacks_created_at_idx": {
+          "name": "survey_customer_feedbacks_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_benefits_benefits": {
+      "name": "employee_benefits_benefits",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "printemps": {
+          "name": "printemps",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dohaoasis": {
+          "name": "dohaoasis",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "banyantree": {
+          "name": "banyantree",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_benefits_benefits_order_idx": {
+          "name": "employee_benefits_benefits_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "employee_benefits_benefits_parent_id_idx": {
+          "name": "employee_benefits_benefits_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_benefits_benefits__parent_id_employee_benefits_id_fk": {
+          "name": "employee_benefits_benefits__parent_id_employee_benefits_id_fk",
+          "tableFrom": "employee_benefits_benefits",
+          "tableTo": "employee_benefits",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_benefits_attachments": {
+      "name": "employee_benefits_attachments",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "employee_benefits_attachments_order_idx": {
+          "name": "employee_benefits_attachments_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "employee_benefits_attachments_parent_id_idx": {
+          "name": "employee_benefits_attachments_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_benefits_attachments__parent_id_employee_benefits_id_fk": {
+          "name": "employee_benefits_attachments__parent_id_employee_benefits_id_fk",
+          "tableFrom": "employee_benefits_attachments",
+          "tableTo": "employee_benefits",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_benefits": {
+      "name": "employee_benefits",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_info_phone": {
+          "name": "contact_info_phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_info_email": {
+          "name": "contact_info_email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_info_point_of_contact": {
+          "name": "contact_info_point_of_contact",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_info_address": {
+          "name": "contact_info_address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expiry_date": {
+          "name": "expiry_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "external_link": {
+          "name": "external_link",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "terms_and_condition": {
+          "name": "terms_and_condition",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "_status": {
+          "name": "_status",
+          "type": "enum_employee_benefits_status",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_benefits_created_at_idx": {
+          "name": "employee_benefits_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_benefits_rels": {
+      "name": "employee_benefits_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "employee_benefits_category_id": {
+          "name": "employee_benefits_category_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "media_id": {
+          "name": "media_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_benefits_rels_order_idx": {
+          "name": "employee_benefits_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "employee_benefits_rels_parent_idx": {
+          "name": "employee_benefits_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "employee_benefits_rels_path_idx": {
+          "name": "employee_benefits_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_benefits_rels_parent_id_employee_benefits_id_fk": {
+          "name": "employee_benefits_rels_parent_id_employee_benefits_id_fk",
+          "tableFrom": "employee_benefits_rels",
+          "tableTo": "employee_benefits",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "employee_benefits_rels_employee_benefits_category_id_employee_benefits_category_id_fk": {
+          "name": "employee_benefits_rels_employee_benefits_category_id_employee_benefits_category_id_fk",
+          "tableFrom": "employee_benefits_rels",
+          "tableTo": "employee_benefits_category",
+          "columnsFrom": [
+            "employee_benefits_category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "employee_benefits_rels_media_id_media_id_fk": {
+          "name": "employee_benefits_rels_media_id_media_id_fk",
+          "tableFrom": "employee_benefits_rels",
+          "tableTo": "media",
+          "columnsFrom": [
+            "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_employee_benefits_v_version_benefits": {
+      "name": "_employee_benefits_v_version_benefits",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "printemps": {
+          "name": "printemps",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dohaoasis": {
+          "name": "dohaoasis",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "banyantree": {
+          "name": "banyantree",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_employee_benefits_v_version_benefits_order_idx": {
+          "name": "_employee_benefits_v_version_benefits_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_version_benefits_parent_id_idx": {
+          "name": "_employee_benefits_v_version_benefits_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "_employee_benefits_v_version_benefits__parent_id__employee_benefits_v_id_fk": {
+          "name": "_employee_benefits_v_version_benefits__parent_id__employee_benefits_v_id_fk",
+          "tableFrom": "_employee_benefits_v_version_benefits",
+          "tableTo": "_employee_benefits_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_employee_benefits_v_version_attachments": {
+      "name": "_employee_benefits_v_version_attachments",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_employee_benefits_v_version_attachments_order_idx": {
+          "name": "_employee_benefits_v_version_attachments_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_version_attachments_parent_id_idx": {
+          "name": "_employee_benefits_v_version_attachments_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "_employee_benefits_v_version_attachments__parent_id__employee_benefits_v_id_fk": {
+          "name": "_employee_benefits_v_version_attachments__parent_id__employee_benefits_v_id_fk",
+          "tableFrom": "_employee_benefits_v_version_attachments",
+          "tableTo": "_employee_benefits_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_employee_benefits_v": {
+      "name": "_employee_benefits_v",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "version_name": {
+          "name": "version_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_contact_info_phone": {
+          "name": "version_contact_info_phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_contact_info_email": {
+          "name": "version_contact_info_email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_contact_info_point_of_contact": {
+          "name": "version_contact_info_point_of_contact",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_contact_info_address": {
+          "name": "version_contact_info_address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_expiry_date": {
+          "name": "version_expiry_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_external_link": {
+          "name": "version_external_link",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_terms_and_condition": {
+          "name": "version_terms_and_condition",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_updated_at": {
+          "name": "version_updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_created_at": {
+          "name": "version_created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version__status": {
+          "name": "version__status",
+          "type": "enum__employee_benefits_v_version_status",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "latest": {
+          "name": "latest",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_employee_benefits_v_version_version_created_at_idx": {
+          "name": "_employee_benefits_v_version_version_created_at_idx",
+          "columns": [
+            "version_created_at"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_created_at_idx": {
+          "name": "_employee_benefits_v_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_updated_at_idx": {
+          "name": "_employee_benefits_v_updated_at_idx",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_latest_idx": {
+          "name": "_employee_benefits_v_latest_idx",
+          "columns": [
+            "latest"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_employee_benefits_v_rels": {
+      "name": "_employee_benefits_v_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "employee_benefits_id": {
+          "name": "employee_benefits_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employee_benefits_category_id": {
+          "name": "employee_benefits_category_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "media_id": {
+          "name": "media_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_employee_benefits_v_rels_order_idx": {
+          "name": "_employee_benefits_v_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_rels_parent_idx": {
+          "name": "_employee_benefits_v_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "_employee_benefits_v_rels_path_idx": {
+          "name": "_employee_benefits_v_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "_employee_benefits_v_rels_parent_id__employee_benefits_v_id_fk": {
+          "name": "_employee_benefits_v_rels_parent_id__employee_benefits_v_id_fk",
+          "tableFrom": "_employee_benefits_v_rels",
+          "tableTo": "_employee_benefits_v",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_employee_benefits_v_rels_employee_benefits_id_employee_benefits_id_fk": {
+          "name": "_employee_benefits_v_rels_employee_benefits_id_employee_benefits_id_fk",
+          "tableFrom": "_employee_benefits_v_rels",
+          "tableTo": "employee_benefits",
+          "columnsFrom": [
+            "employee_benefits_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_employee_benefits_v_rels_employee_benefits_category_id_employee_benefits_category_id_fk": {
+          "name": "_employee_benefits_v_rels_employee_benefits_category_id_employee_benefits_category_id_fk",
+          "tableFrom": "_employee_benefits_v_rels",
+          "tableTo": "employee_benefits_category",
+          "columnsFrom": [
+            "employee_benefits_category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_employee_benefits_v_rels_media_id_media_id_fk": {
+          "name": "_employee_benefits_v_rels_media_id_media_id_fk",
+          "tableFrom": "_employee_benefits_v_rels",
+          "tableTo": "media",
+          "columnsFrom": [
+            "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_benefits_category": {
+      "name": "employee_benefits_category",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "employee_benefits_category_created_at_idx": {
+          "name": "employee_benefits_category_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_banner": {
+      "name": "employee_banner",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "link": {
+          "name": "link",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "_status": {
+          "name": "_status",
+          "type": "enum_employee_banner_status",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_banner_name_idx": {
+          "name": "employee_banner_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "employee_banner_created_at_idx": {
+          "name": "employee_banner_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "employee_banner_rels": {
+      "name": "employee_banner_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "media_id": {
+          "name": "media_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "employee_banner_rels_order_idx": {
+          "name": "employee_banner_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "employee_banner_rels_parent_idx": {
+          "name": "employee_banner_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "employee_banner_rels_path_idx": {
+          "name": "employee_banner_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "employee_banner_rels_parent_id_employee_banner_id_fk": {
+          "name": "employee_banner_rels_parent_id_employee_banner_id_fk",
+          "tableFrom": "employee_banner_rels",
+          "tableTo": "employee_banner",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "employee_banner_rels_media_id_media_id_fk": {
+          "name": "employee_banner_rels_media_id_media_id_fk",
+          "tableFrom": "employee_banner_rels",
+          "tableTo": "media",
+          "columnsFrom": [
+            "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_employee_banner_v": {
+      "name": "_employee_banner_v",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "version_name": {
+          "name": "version_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_link": {
+          "name": "version_link",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_updated_at": {
+          "name": "version_updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version_created_at": {
+          "name": "version_created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version__status": {
+          "name": "version__status",
+          "type": "enum__employee_banner_v_version_status",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "latest": {
+          "name": "latest",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_employee_banner_v_version_version_name_idx": {
+          "name": "_employee_banner_v_version_version_name_idx",
+          "columns": [
+            "version_name"
+          ],
+          "isUnique": false
+        },
+        "_employee_banner_v_version_version_created_at_idx": {
+          "name": "_employee_banner_v_version_version_created_at_idx",
+          "columns": [
+            "version_created_at"
+          ],
+          "isUnique": false
+        },
+        "_employee_banner_v_created_at_idx": {
+          "name": "_employee_banner_v_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "_employee_banner_v_updated_at_idx": {
+          "name": "_employee_banner_v_updated_at_idx",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        },
+        "_employee_banner_v_latest_idx": {
+          "name": "_employee_banner_v_latest_idx",
+          "columns": [
+            "latest"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "_employee_banner_v_rels": {
+      "name": "_employee_banner_v_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "employee_banner_id": {
+          "name": "employee_banner_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "media_id": {
+          "name": "media_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_employee_banner_v_rels_order_idx": {
+          "name": "_employee_banner_v_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "_employee_banner_v_rels_parent_idx": {
+          "name": "_employee_banner_v_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "_employee_banner_v_rels_path_idx": {
+          "name": "_employee_banner_v_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "_employee_banner_v_rels_parent_id__employee_banner_v_id_fk": {
+          "name": "_employee_banner_v_rels_parent_id__employee_banner_v_id_fk",
+          "tableFrom": "_employee_banner_v_rels",
+          "tableTo": "_employee_banner_v",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_employee_banner_v_rels_employee_banner_id_employee_banner_id_fk": {
+          "name": "_employee_banner_v_rels_employee_banner_id_employee_banner_id_fk",
+          "tableFrom": "_employee_banner_v_rels",
+          "tableTo": "employee_banner",
+          "columnsFrom": [
+            "employee_banner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "_employee_banner_v_rels_media_id_media_id_fk": {
+          "name": "_employee_banner_v_rels_media_id_media_id_fk",
+          "tableFrom": "_employee_banner_v_rels",
+          "tableTo": "media",
+          "columnsFrom": [
+            "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "enable_a_p_i_key": {
+          "name": "enable_a_p_i_key",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "api_key": {
+          "name": "api_key",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "api_key_index": {
+          "name": "api_key_index",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reset_password_token": {
+          "name": "reset_password_token",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reset_password_expiration": {
+          "name": "reset_password_expiration",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salt": {
+          "name": "salt",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hash": {
+          "name": "hash",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "login_attempts": {
+          "name": "login_attempts",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lock_until": {
+          "name": "lock_until",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "users_created_at_idx": {
+          "name": "users_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "users_email_idx": {
+          "name": "users_email_idx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users_rels": {
+      "name": "users_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "operators_id": {
+          "name": "operators_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_roles_id": {
+          "name": "user_roles_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_access_id": {
+          "name": "user_access_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "users_rels_order_idx": {
+          "name": "users_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "users_rels_parent_idx": {
+          "name": "users_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "users_rels_path_idx": {
+          "name": "users_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "users_rels_parent_id_users_id_fk": {
+          "name": "users_rels_parent_id_users_id_fk",
+          "tableFrom": "users_rels",
+          "tableTo": "users",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "users_rels_operators_id_operators_id_fk": {
+          "name": "users_rels_operators_id_operators_id_fk",
+          "tableFrom": "users_rels",
+          "tableTo": "operators",
+          "columnsFrom": [
+            "operators_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "users_rels_user_roles_id_user_roles_id_fk": {
+          "name": "users_rels_user_roles_id_user_roles_id_fk",
+          "tableFrom": "users_rels",
+          "tableTo": "user_roles",
+          "columnsFrom": [
+            "user_roles_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "users_rels_user_access_id_user_access_id_fk": {
+          "name": "users_rels_user_access_id_user_access_id_fk",
+          "tableFrom": "users_rels",
+          "tableTo": "user_access",
+          "columnsFrom": [
+            "user_access_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user_roles": {
+      "name": "user_roles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "user_roles_name_idx": {
+          "name": "user_roles_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "user_roles_created_at_idx": {
+          "name": "user_roles_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user_access_access": {
+      "name": "user_access_access",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hidden": {
+          "name": "hidden",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "read": {
+          "name": "read",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create": {
+          "name": "create",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "update": {
+          "name": "update",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "admin": {
+          "name": "admin",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "delete": {
+          "name": "delete",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access": {
+          "name": "access",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "user_access_access_order_idx": {
+          "name": "user_access_access_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "user_access_access_parent_id_idx": {
+          "name": "user_access_access_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "user_access_access__parent_id_user_access_id_fk": {
+          "name": "user_access_access__parent_id_user_access_id_fk",
+          "tableFrom": "user_access_access",
+          "tableTo": "user_access",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user_access": {
+      "name": "user_access",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "user_access_name_idx": {
+          "name": "user_access_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "user_access_created_at_idx": {
+          "name": "user_access_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "operators": {
+      "name": "operators",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "operators_created_at_idx": {
+          "name": "operators_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "department_department_subs": {
+      "name": "department_department_subs",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "department_department_subs_order_idx": {
+          "name": "department_department_subs_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "department_department_subs_parent_id_idx": {
+          "name": "department_department_subs_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "department_department_subs__parent_id_department_id_fk": {
+          "name": "department_department_subs__parent_id_department_id_fk",
+          "tableFrom": "department_department_subs",
+          "tableTo": "department",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "department": {
+      "name": "department",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "department_name_idx": {
+          "name": "department_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "department_created_at_idx": {
+          "name": "department_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "contents_header": {
+      "name": "contents_header",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language": {
+          "name": "language",
+          "type": "enum_contents_header_language",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "contents_header_order_idx": {
+          "name": "contents_header_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "contents_header_parent_id_idx": {
+          "name": "contents_header_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "contents_header__parent_id_contents_id_fk": {
+          "name": "contents_header__parent_id_contents_id_fk",
+          "tableFrom": "contents_header",
+          "tableTo": "contents",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "contents_info": {
+      "name": "contents_info",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language": {
+          "name": "language",
+          "type": "enum_contents_info_language",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "contents_info_order_idx": {
+          "name": "contents_info_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "contents_info_parent_id_idx": {
+          "name": "contents_info_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "contents_info__parent_id_contents_id_fk": {
+          "name": "contents_info__parent_id_contents_id_fk",
+          "tableFrom": "contents_info",
+          "tableTo": "contents",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "contents": {
+      "name": "contents",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "contents_created_at_idx": {
+          "name": "contents_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "media": {
+      "name": "media",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "alt": {
+          "name": "alt",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filename": {
+          "name": "filename",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mime_type": {
+          "name": "mime_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filesize": {
+          "name": "filesize",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "width": {
+          "name": "width",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height": {
+          "name": "height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "media_created_at_idx": {
+          "name": "media_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "media_filename_idx": {
+          "name": "media_filename_idx",
+          "columns": [
+            "filename"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "survey_net_promoter": {
+      "name": "survey_net_promoter",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "visit_date": {
+          "name": "visit_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "receipt_id": {
+          "name": "receipt_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customer_feedback": {
+          "name": "customer_feedback",
+          "type": "enum_survey_net_promoter_customer_feedback",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customer_comments": {
+          "name": "customer_comments",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "survey_net_promoter_created_at_idx": {
+          "name": "survey_net_promoter_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "payload_preferences": {
+      "name": "payload_preferences",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "key": {
+          "name": "key",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value": {
+          "name": "value",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "payload_preferences_key_idx": {
+          "name": "payload_preferences_key_idx",
+          "columns": [
+            "key"
+          ],
+          "isUnique": false
+        },
+        "payload_preferences_created_at_idx": {
+          "name": "payload_preferences_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "payload_preferences_rels": {
+      "name": "payload_preferences_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "users_id": {
+          "name": "users_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "payload_preferences_rels_order_idx": {
+          "name": "payload_preferences_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "payload_preferences_rels_parent_idx": {
+          "name": "payload_preferences_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "payload_preferences_rels_path_idx": {
+          "name": "payload_preferences_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "payload_preferences_rels_parent_id_payload_preferences_id_fk": {
+          "name": "payload_preferences_rels_parent_id_payload_preferences_id_fk",
+          "tableFrom": "payload_preferences_rels",
+          "tableTo": "payload_preferences",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_preferences_rels_users_id_users_id_fk": {
+          "name": "payload_preferences_rels_users_id_users_id_fk",
+          "tableFrom": "payload_preferences_rels",
+          "tableTo": "users",
+          "columnsFrom": [
+            "users_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "payload_migrations": {
+      "name": "payload_migrations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "batch": {
+          "name": "batch",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "payload_migrations_created_at_idx": {
+          "name": "payload_migrations_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "_locales": {
+      "name": "_locales",
+      "values": {
+        "en": "en",
+        "ar": "ar",
+        "fr": "fr"
+      }
+    },
+    "enum_employee_questions_item_type": {
+      "name": "enum_employee_questions_item_type",
+      "values": {
+        "text": "text",
+        "checkbox": "checkbox"
+      }
+    },
+    "enum_employee_questions_item_language": {
+      "name": "enum_employee_questions_item_language",
+      "values": {
+        "en": "en",
+        "ar": "ar",
+        "fr": "fr"
+      }
+    },
+    "enum_employee_responses_questions_response": {
+      "name": "enum_employee_responses_questions_response",
+      "values": {
+        "strongly-disagree": "strongly-disagree",
+        "disagree": "disagree",
+        "i-do-not-know": "i-do-not-know",
+        "agree": "agree",
+        "strongly-agree": "strongly-agree"
+      }
+    },
+    "enum_survey_customer_feedbacks_visit_frequency": {
+      "name": "enum_survey_customer_feedbacks_visit_frequency",
+      "values": {
+        "daily": "daily",
+        "weekly": "weekly",
+        "monthly": "monthly",
+        "first-time": "first-time"
+      }
+    },
+    "enum_survey_customer_feedbacks_rating_greeting": {
+      "name": "enum_survey_customer_feedbacks_rating_greeting",
+      "values": {
+        "poor": "poor",
+        "average": "average",
+        "good": "good",
+        "very-good": "very-good",
+        "excellent": "excellent"
+      }
+    },
+    "enum_survey_customer_feedbacks_rating_service": {
+      "name": "enum_survey_customer_feedbacks_rating_service",
+      "values": {
+        "poor": "poor",
+        "average": "average",
+        "good": "good",
+        "very-good": "very-good",
+        "excellent": "excellent"
+      }
+    },
+    "enum_survey_customer_feedbacks_rating_beverage": {
+      "name": "enum_survey_customer_feedbacks_rating_beverage",
+      "values": {
+        "poor": "poor",
+        "average": "average",
+        "good": "good",
+        "very-good": "very-good",
+        "excellent": "excellent"
+      }
+    },
+    "enum_survey_customer_feedbacks_rating_food": {
+      "name": "enum_survey_customer_feedbacks_rating_food",
+      "values": {
+        "poor": "poor",
+        "average": "average",
+        "good": "good",
+        "very-good": "very-good",
+        "excellent": "excellent"
+      }
+    },
+    "enum_survey_customer_feedbacks_rating_value_for_money": {
+      "name": "enum_survey_customer_feedbacks_rating_value_for_money",
+      "values": {
+        "poor": "poor",
+        "average": "average",
+        "good": "good",
+        "very-good": "very-good",
+        "excellent": "excellent"
+      }
+    },
+    "enum_survey_customer_feedbacks_rating_cleanliness": {
+      "name": "enum_survey_customer_feedbacks_rating_cleanliness",
+      "values": {
+        "poor": "poor",
+        "average": "average",
+        "good": "good",
+        "very-good": "very-good",
+        "excellent": "excellent"
+      }
+    },
+    "enum_employee_benefits_status": {
+      "name": "enum_employee_benefits_status",
+      "values": {
+        "draft": "draft",
+        "published": "published"
+      }
+    },
+    "enum__employee_benefits_v_version_status": {
+      "name": "enum__employee_benefits_v_version_status",
+      "values": {
+        "draft": "draft",
+        "published": "published"
+      }
+    },
+    "enum_employee_banner_status": {
+      "name": "enum_employee_banner_status",
+      "values": {
+        "draft": "draft",
+        "published": "published"
+      }
+    },
+    "enum__employee_banner_v_version_status": {
+      "name": "enum__employee_banner_v_version_status",
+      "values": {
+        "draft": "draft",
+        "published": "published"
+      }
+    },
+    "enum_contents_header_language": {
+      "name": "enum_contents_header_language",
+      "values": {
+        "en": "en",
+        "ar": "ar",
+        "fr": "fr"
+      }
+    },
+    "enum_contents_info_language": {
+      "name": "enum_contents_info_language",
+      "values": {
+        "en": "en",
+        "ar": "ar",
+        "fr": "fr"
+      }
+    },
+    "enum_survey_net_promoter_customer_feedback": {
+      "name": "enum_survey_net_promoter_customer_feedback",
+      "values": {
+        "detractor": "detractor",
+        "neutral": "neutral",
+        "promoter": "promoter"
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

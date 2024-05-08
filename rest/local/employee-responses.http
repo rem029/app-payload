@@ -1,0 +1,122 @@
+@urlBase = http://localhost:3005/payload
+@urlResponses = {{urlBase}}/api/employee-responses
+
+### GET
+GET {{urlResponses}}
+Content-Type: application/json
+Authorization: users API-Key 19000dfc-38a1-45dd-ac72-adb8f0295efe
+
+### ADD
+POST {{urlResponses}}
+Content-Type: application/json
+
+{
+  "anonymous_id": "3",
+  "questions": [
+    {"question": 1, "response": "very-high"},
+    {"question": 2, "response": "low"}
+  ]
+}
+
+
+### ADD WITH COMMENT
+POST {{urlResponses}}
+Content-Type: application/json
+Authorization: users API-Key 26c3bd06-d65d-4ba7-a646-83d52c39a66b
+
+{
+  "anonymous_id": "12345",
+  "department": "DO Centralized IT",
+  "department_sub": "IT Support",
+  "questions": [
+    { "question": 1, "response": "very-high" },
+    { "question": 2, "response": "high" },
+    { "question": 3, "response": "neutral" },
+    { "question": 4, "response": "low" },
+    { "question": 5, "response": "very-low" },
+    { "question": 6, "response": "neutral" },
+    { "question": 7, "response": "very-low" },
+    { "question": 8, "response": "very-low" },
+    { "question": 9, "response": "very-low" },
+    { "question": 10, "response": "very-low" },
+    { "question": 11, "response": "very-high" },
+    { "question": 12, "response": "neutral" },
+    { "question": 13, "response": "very-low" },
+    { "question": 14, "response": "neutral" },
+    { "question": 15, "response": "very-low" },
+    { "question": 16, "response": "very-low" },
+    { "question": 17, "response": "high" },
+    { "question": 18, "response": "low" },
+    { "question": 19, "response": "very-low" },
+    { "question": 20, "response": "very-low" }
+  ],
+  "employee_comments": "Hello  world with comment!!!"
+}
+
+
+### ADD WITHOUT COMMENT
+POST {{urlResponses}}
+Content-Type: application/json
+Authorization: users API-Key 26c3bd06-d65d-4ba7-a646-83d52c39a66b
+
+{
+  "anonymous_id": "789",
+  "department": "DO Centralized IT",
+  "department_sub": "IT Support",
+  "questions": [
+    { "question": 1, "response": "very-high" },
+    { "question": 2, "response": "high" },
+    { "question": 3, "response": "neutral" },
+    { "question": 4, "response": "low" },
+    { "question": 5, "response": "very-low" },
+    { "question": 6, "response": "neutral" },
+    { "question": 7, "response": "very-low" },
+    { "question": 8, "response": "very-low" },
+    { "question": 9, "response": "very-low" },
+    { "question": 10, "response": "very-low" },
+    { "question": 11, "response": "very-high" },
+    { "question": 12, "response": "neutral" },
+    { "question": 13, "response": "very-low" },
+    { "question": 14, "response": "neutral" },
+    { "question": 15, "response": "very-low" },
+    { "question": 16, "response": "very-low" },
+    { "question": 17, "response": "high" },
+    { "question": 18, "response": "low" },
+    { "question": 19, "response": "very-low" },
+    { "question": 20, "response": "very-low" }
+  ]
+}
+
+
+### ADD WITHOUT COMMENT NEW
+POST {{urlResponses}}
+Content-Type: application/json
+Authorization: users API-Key 26c3bd06-d65d-4ba7-a646-83d52c39a66b
+
+{
+  "anonymous_id": "78941111",
+  "department": "DO Centralized IT",
+  "department_sub": "IT Support",
+  "questions": [
+    { "question": 1, "response": "strongly-agree" },
+    { "question": 2, "response": "agree" },
+    { "question": 3, "response": "i-do-not-know" },
+    { "question": 4, "response": "disagree" },
+    { "question": 5, "response": "strongly-disagree" },
+    { "question": 6, "response": "i-do-not-know" },
+    { "question": 7, "response": "strongly-disagree" },
+    { "question": 8, "response": "strongly-disagree" },
+    { "question": 9, "response": "strongly-disagree" },
+    { "question": 10, "response": "strongly-disagree" },
+    { "question": 11, "response": "strongly-agree" },
+    { "question": 12, "response": "i-do-not-know" },
+    { "question": 13, "response": "strongly-disagree" },
+    { "question": 14, "response": "i-do-not-know" },
+    { "question": 15, "response": "strongly-disagree" },
+    { "question": 16, "response": "strongly-disagree" },
+    { "question": 17, "response": "agree" },
+    { "question": 18, "response": "disagree" },
+    { "question": 19, "response": "strongly-disagree" },
+    { "question": 20, "response": "strongly-disagree" }
+  ]
+}
