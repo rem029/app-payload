@@ -1,29 +1,27 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Suspense, useMemo } from "react";
-import { getPageConfig } from "../helpers";
+import { Suspense, useEffect, useMemo } from "react";
 import Header from "../components/header";
 import { Helmet } from "react-helmet";
 import { API_SURVEY_URL } from "../utils/constants";
+import { capitalize } from "../helpers";
+import Footer from "../components/footer";
 
-function Root() {
+const Root = () => {
   const { pathname } = useLocation();
 
-  const { header } = useMemo(() => {
-    const { header, theme } = getPageConfig(pathname);
-    document.title = header ? `Doha Oasis | ${header}` : "Doha Oasis";
-    document.querySelector("html")?.setAttribute("data-theme", theme);
-    return { header };
+  const header = useMemo(() => {
+    if (pathname === "") return undefined;
+
+    return capitalize(pathname.replaceAll("/", " "));
   }, [pathname]);
 
-  const showHeader = useMemo(() => {
-    if (pathname.includes("/employee-benefits")) return false;
-    if (pathname.includes("/clubprintemps")) return false;
-    if (pathname.includes("/dohaquest")) return false;
+  useEffect(() => {
+    document.title = header ? `Rem Apps | ${header}` : "Rem Apps";
+    document.querySelector("html")?.setAttribute("data-theme", "default");
+  }, [header]);
 
-    return true;
-  }, [pathname]);
   return (
-    <div className="w-full max-h-screen flex flex-col items-center justify-start bg-neutral overflow-x-hidden overflow-y-auto">
+    <div className="w-full flex flex-col items-center justify-start bg-neutral">
       <Helmet>
         <link rel="icon" href={`${API_SURVEY_URL}/media//favicon.ico`} />
         <link
@@ -53,14 +51,11 @@ function Root() {
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#78716c" />
-        <meta
-          name="description"
-          content="Share Your Dining Experience to Help Us Serve You Better!"
-        />
+        <meta name="description" content="Staging apps are deployed here" />
 
-        <title>{header ? `Doha Oasis | ${header}` : "Doha Oasis"}</title>
+        <title>{header ? `Rem Apps | ${header}` : "Rem Apps"}</title>
       </Helmet>
-      <div className="max-w-[720px] w-full min-h-screen flex flex-col items-center justify-start">
+      <div className="w-screen h-screen flex flex-col items-center justify-start overflow-x-hidden overflow-y-auto">
         <Suspense
           fallback={
             <div className="w-screen h-screen flex flex-col items-center justify-center">
@@ -69,12 +64,12 @@ function Root() {
             </div>
           }
         >
-          {showHeader && <Header />}
+          <Header title={header} />
           <Outlet />
         </Suspense>
       </div>
     </div>
   );
-}
+};
 
 export default Root;

@@ -774,7 +774,7 @@ const data = [
     _status: "published",
   },
   {
-    name: "Doha Oasis Padle Courts",
+    name: "Rem Apps Padle Courts",
     general_info: {
       category: [
         {

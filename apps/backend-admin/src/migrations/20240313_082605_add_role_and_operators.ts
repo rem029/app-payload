@@ -2,7 +2,7 @@ import { MigrateUpArgs, MigrateDownArgs } from "@payloadcms/db-postgres";
 import { sql } from "drizzle-orm";
 
 const roles = ["Admin", "User", "Reviewer"];
-const operators = ["Banyan Tree", "Doha Oasis", "Doha Quest", "Printemps", "VOX"];
+const operators = ["Banyan Tree", "Rem Apps", "Doha Quest", "Printemps", "VOX"];
 
 export async function up({ payload }: MigrateUpArgs): Promise<void> {
   for (let rIndex = 0; rIndex < roles.length; rIndex++) {

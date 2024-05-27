@@ -16,7 +16,7 @@ export const emailSend = async (email: string, payload: Payload) => {
 
   const response = await payload.sendEmail({
     to: email,
-    subject: "Doha Oasis Employee Survey",
+    subject: "Rem Apps Employee Survey",
     html: generateEmployeeSurveyHTML(urlEmail),
   });
 

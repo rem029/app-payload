@@ -1,5 +1,5 @@
 {
-  "name": "do-app",
+  "name": "rem-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,21 +7,17 @@
     "concurrently": "^8.2.2"
   },
   "scripts": {
-    "install:deps": "bash install_deps.sh",
-    "build:backend": "cd apps/backend && yarn build",
-    "build:backend-admin": "cd apps/backend-admin && yarn build",
-    "build:frontend": "cd apps/frontend && yarn build",
-    "dev:backend": "cd apps/backend && yarn dev",
-    "dev:backend-admin": "cd apps/backend-admin && yarn dev",
-    "dev:frontend": "cd apps/frontend && yarn dev",
-    "dev": "concurrently -n backend-emp,backend,frontend \"yarn dev:backend-admin\" \"yarn dev:backend\" \"yarn dev:frontend\"",
-    "migrate:latest": "cd apps/backend && yarn migrate:latest",
-    "migrate:revert": "cd apps/backend && yarn migrate:revert",
+    "build:backend-admin": "yarn --cwd apps/backend-admin build",
+    "build:frontend": "yarn --cwd apps/frontend build",
+    "dev:backend-admin": "yarn --cwd apps/backend-admin dev",
+    "dev:frontend": "yarn --cwd apps/frontend dev",
+    "dev": "concurrently -n backend-emp,frontend \"yarn dev:backend-admin\" \"yarn dev:frontend\"",
+    "install:all": "yarn --cwd apps/frontend install && yarn --cwd apps/backend-admin install",
+    "migrate:latest": "yarn --cwd apps/backend-admin migrate:latest",
+    "migrate:revert": "yarn --cwd apps/backend-admin migrate:revert",
     "push:production": "bash scripts/common/git-push-production.sh",
     "push:production:win": "git checkout production && git pull origin dev && git push origin production && git checkout dev",
-    "start:backend": "cd apps/backend && yarn start",
-    "start:production:private": "bash scripts/common/init-app.sh production survey_do",
-    "start:production:public": "bash scripts/common/init-app.sh production survey_do"
+    "start:production": "bash scripts/common/init-app.sh production"
   },
   "keywords": [],
   "author": "",

@@ -269,12 +269,12 @@ Content-Type: application/json
 ]
 }
 
-### ADD NEW ITEM Doha Oasis Padle Courts
+### ADD NEW ITEM Rem Apps Padle Courts
 POST {{urlAPI}}
 Content-Type: application/json
 
 {
-  "name": "Doha Oasis Padle Courts",
+  "name": "Rem Apps Padle Courts",
 "general_info": {
   
   "category": [6]

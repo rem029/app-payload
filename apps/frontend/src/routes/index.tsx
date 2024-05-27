@@ -1,60 +1,18 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Root from "../pages/root";
-import { WEB_TYPE } from "../utils/constants";
-import EmployeeSurveyPage from "../pages/employee-survey";
-import ChatPage from "../pages/chat";
-import CustomerSurveyPage from "../pages/customer-survey";
-import EmployeeBenefitsPage from "../pages/employee-benefits";
-import ClubprintempsPage from "../pages/clubprintemps";
-import LoginPage from "../pages/login";
-import LoginSuccessPage from "../pages/login-success";
-import ChatBasePage from "../pages/chatbase";
-import IFlyWaiverPage from "../pages/dohaquest/ifly-waiver";
+import { RouteObjectWithLabel } from "../types";
+import ExpenseTracker from "../pages/expense-tracker";
 
-const routes_private: RouteObject[] = [
+const routes: RouteObjectWithLabel[] = [
   {
-    path: "/employee",
-    element: <EmployeeSurveyPage />,
-  },
-  {
-    path: "/chat",
-    element: <ChatBasePage />,
-  },
-  {
-    path: "/chat/old",
-    element: <ChatPage />,
-  },
-  {
-    path: "/survey/retail",
-    element: <CustomerSurveyPage type="retail" />,
-  },
-  { path: "/login", element: <LoginPage /> },
-  { path: "/login-success", element: <LoginSuccessPage /> },
-];
-const routes_public: RouteObject[] = [
-  {
-    path: "/survey/fnb",
-    element: <CustomerSurveyPage type="fnb" />,
-  },
-  {
-    path: "/employee-benefits",
-    element: <EmployeeBenefitsPage />,
-  },
-  {
-    path: "/clubprintemps",
-    element: <ClubprintempsPage />,
-  },
-  {
-    path: "/dohaquest",
-    children: [{ path: "ifly-waiver", element: <IFlyWaiverPage /> }],
+    path: "/expense-tracker",
+    element: <ExpenseTracker />,
+    children: [
+      { path: "page1", element: <ExpenseTracker /> },
+      { path: "page2", element: <ExpenseTracker /> },
+    ],
   },
 ];
-
-const routesObject: Record<string, RouteObject[]> = {
-  default: [...routes_private, ...routes_public],
-  public: routes_public,
-  private: routes_private,
-};
 
 const router = createBrowserRouter([
   {
@@ -65,7 +23,7 @@ const router = createBrowserRouter([
         <h3 className="text-2xl font-bold">Nothing here. Just go back. 🙊</h3>
       </div>
     ),
-    children: routesObject[WEB_TYPE],
+    children: routes,
   },
 ]);
 

@@ -38,10 +38,10 @@ export const generateEmployeeSurveyHTML = (url: string): string => {
             background-color: #B69665; /* Slightly darker for hover effect */
         }
     </style>
-    <title>Doha Oasis Employee Survey</title>
+    <title>Rem Apps Employee Survey</title>
 </head>
 <body>
-    <h1>Doha Oasis Employee Survey</h1>
+    <h1>Rem Apps Employee Survey</h1>
     <p>Please complete this employee survey</p>
     <a href="${url}" target="_blank">Start Survey</a>
 </body>
